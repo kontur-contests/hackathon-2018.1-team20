@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 public class Field : MonoBehaviour
@@ -12,6 +11,7 @@ public class Field : MonoBehaviour
     void Start()
     {
         _cardController = FindObjectOfType<CardController>();
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
     }
 
     void Update()
@@ -33,6 +33,7 @@ public class Field : MonoBehaviour
     {
         var contributor = _cardController.DistributeSelectedCard();
         _currentContributor = Instantiate(contributor, transform.position, Quaternion.identity);
+        contributor.transform.position = new Vector3(transform.position.x, transform.position.y, name[0]);
         var controller = _currentContributor.GetComponent<BasicCollaboratorController>();
         controller.OnDie += () => { RemoveCurrentContributor(controller); };
     }
@@ -50,6 +51,12 @@ public class Field : MonoBehaviour
 
     void OnMouseOver()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 1f, 1f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
     }
+
+    void OnMouseExit()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
+    }
+
 }

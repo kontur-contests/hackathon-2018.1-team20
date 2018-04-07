@@ -9,12 +9,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Rigidbody>().velocity = 3 * Vector3.right;
-    }
-
-    void Update()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+        GetComponent<Rigidbody>().velocity = 3 * Vector2.right;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -23,6 +18,17 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Hit");
             var controller = collision.collider.GetComponent<GrandmotherController>();
+            controller.ReceiveDamage(Damage);
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.tag.Equals("Grandmother"))
+        {
+            Debug.Log("Hit");
+            var controller = collision.GetComponent<GrandmotherController>();
             controller.ReceiveDamage(Damage);
             Destroy(gameObject);
         }

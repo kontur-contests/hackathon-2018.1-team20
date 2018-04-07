@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
 
@@ -51,6 +50,7 @@ public class CardController : MonoBehaviour
             Debug.LogError("You try add not card");
             return;
         }
+        UnselectCurrentCard();
         _selectedCard = card;
         _selectedCard.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
     }
@@ -91,9 +91,9 @@ public class CardController : MonoBehaviour
     {
         cardTypeToGameObject = new Dictionary<Card.CardType, GameObject>();
         cardTypeToGameObject[Card.CardType.BuckwheatGun] =
-            AssetDatabase.LoadAssetAtPath<GameObject>(@"Assets/HQDefence/Prefabs/BuckwheatGun.prefab");
+            Resources.Load<GameObject>(@"HQDefence/BuckwheatGun");
         cardTypeToGameObject[Card.CardType.Portrait] =
-            AssetDatabase.LoadAssetAtPath<GameObject>(@"Assets/HQDefence/Prefabs/Portrait.prefab");
+            Resources.Load<GameObject>(@"HQDefence/Portrait");
     }
 
     GameObject GenerateNextCard()

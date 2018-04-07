@@ -25,7 +25,7 @@ public class Card : MonoBehaviour
         {
             _currentAction.Invoke();
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
     void OnMouseDown()
@@ -35,7 +35,7 @@ public class Card : MonoBehaviour
 
     public void MoveUpWhileNotCollide()
     {
-        UpdateState(CardState.MoveUp);
+        UpdateState(CardState.MoveLeft);
     }
 
     public void SpectateToMouse()
@@ -48,9 +48,9 @@ public class Card : MonoBehaviour
         UpdateState(CardState.Idle);
     }
     
-    void MoveUp()
+    void MoveLeft()
     {
-        transform.Translate(2 * Vector3.up * Time.deltaTime);
+        transform.Translate(2 * Vector3.right * Time.deltaTime);
         if (IsCollide())
             Sleep();
     }
@@ -64,10 +64,10 @@ public class Card : MonoBehaviour
 
     bool IsCollide()
     {
-        var yScale = transform.localScale.y;
-        var colliderHeigth = GetComponent<BoxCollider2D>().size.y * yScale / 2 + 0.05F;
-        var startPosition = new Vector3(transform.position.x, transform.position.y + colliderHeigth);
-        var hit = Physics2D.RaycastAll(startPosition, Vector2.up, 0.01F);
+        var xScale = transform.localScale.x;
+        var colliderWidth = GetComponent<BoxCollider2D>().size.x * xScale / 2 + 0.05F;
+        var startPosition = new Vector3(transform.position.x + colliderWidth, transform.position.y);
+        var hit = Physics2D.RaycastAll(startPosition, Vector2.right, 0.01F);
         return hit.Length != 0;
     }
 
@@ -82,9 +82,9 @@ public class Card : MonoBehaviour
         switch (cardState)
         {
             case CardState.Idle:
-                return () => { if (!IsCollide()) UpdateState(CardState.MoveUp); };
-            case CardState.MoveUp:
-                return MoveUp;
+                return () => { if (!IsCollide()) UpdateState(CardState.MoveLeft); };
+            case CardState.MoveLeft:
+                return MoveLeft;
             case CardState.MoveToMouse:
                 return MoveToMouse;
             default: throw new ArgumentException("Can't convert this cardState to action");
@@ -94,7 +94,7 @@ public class Card : MonoBehaviour
     public enum CardState
     {
         Idle,
-        MoveUp,
+        MoveLeft,
         MoveToMouse
     }
 

@@ -18,8 +18,8 @@ public class BasicCollaboratorController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void Start()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
-    }
+    //void Start()
+    //{
+    //    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+    //}
 }
