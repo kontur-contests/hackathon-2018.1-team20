@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
 
@@ -10,11 +11,13 @@ public class CardController : MonoBehaviour
     public float ReloadTime;
 
     private float _reloadingTime;
-
     private GameObject[] _cards;
+    private GameObject _selectedCard;
+    private Dictionary<Card.CardType, GameObject> cardTypeToGameObject;
 
     void Start()
     {
+        InitCardTypeToDictionary();
         _cards = GetAllCards().ToArray();
         CreateNewCard();
         _reloadingTime = ReloadTime;
@@ -31,6 +34,35 @@ public class CardController : MonoBehaviour
         _reloadingTime -= Time.deltaTime;
     }
 
+    public GameObject GetSelectedCard()
+    {
+        return _selectedCard;
+    }
+
+    public void SelectCard(GameObject card)
+    {
+        if (card.GetComponent<Card>() == null)
+            Debug.LogError("You try add not card");
+        else
+            _selectedCard = card;
+    }
+
+    public GameObject DistributeSelectedCard()
+    {
+        if (_selectedCard == null)
+            return null;
+
+        var cardType = _selectedCard.GetComponent<Card>().Type;
+        var objectPrefab = cardTypeToGameObject[cardType];
+        DeleteCard(_selectedCard);
+        return objectPrefab;
+    }
+
+    public void DeleteCard(GameObject card)
+    {
+        _selectedCard = null;
+        Destroy(card);
+    }
 
     void CreateNewCard()
     {
@@ -39,13 +71,20 @@ public class CardController : MonoBehaviour
         newCard.GetComponent<Card>().MoveUpWhileNotCollide();
     }
 
+    void InitCardTypeToDictionary()
+    {
+        cardTypeToGameObject = new Dictionary<Card.CardType, GameObject>();
+        cardTypeToGameObject[Card.CardType.Buckwheat] =
+            AssetDatabase.LoadAssetAtPath<GameObject>(@"Assets/HQDefence/Prefabs/Buckwheat.prefab");
+    }
+
     GameObject GenerateNextCard()
     {
         var randomIndex = _randomizer.Next(0, _cards.Length);
         return _cards[randomIndex];
     }
 
-    IEnumerable<GameObject> GetAllCards()
+    GameObject[] GetAllCards()
     {
         var result = new GameObject[transform.childCount];
         for (var i = 0; i < transform.childCount; i++)

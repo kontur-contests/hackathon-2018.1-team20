@@ -8,17 +8,15 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
 public class Card : MonoBehaviour
 {
-    public Sprite ObjectSprite;
+    public CardType Type;
 
-    private Sprite _originSprite;
     private Action _currentAction;
-    private State _currentState;
+    private CardState _currentCardState;
+    private CardController _cardController;
 
     void Awake()
     {
-        _originSprite = GetComponent<SpriteRenderer>().sprite;
-        //if (ObjectSprite == null)
-        //    Debug.LogError("SameObject is null");
+        _cardController = FindObjectOfType<CardController>();
     }
 
     void Update()
@@ -31,24 +29,24 @@ public class Card : MonoBehaviour
 
     void OnMouseDown()
     {
-        UpdateState(State.MoveToMouse);
+        _cardController.SelectCard(this.gameObject);
     }
 
     public void MoveUpWhileNotCollide()
     {
-        UpdateState(State.MoveUp);
+        UpdateState(CardState.MoveUp);
     }
 
     public void SpectateToMouse()
     {
-        UpdateState(State.MoveToMouse);
+        UpdateState(CardState.MoveToMouse);
     }
 
     public void Sleep()
     {
-        UpdateState(State.Idle);
+        UpdateState(CardState.Idle);
     }
-
+    
     void MoveUp()
     {
         transform.Translate(2 * Vector3.up * Time.deltaTime);
@@ -72,30 +70,39 @@ public class Card : MonoBehaviour
         return hit.Length != 0;
     }
 
-    void UpdateState(State state)
+    void UpdateState(CardState cardState)
     {
-        _currentAction = ConvertStateToAction(state);
-        _currentState = state;
+        _currentAction = ConvertStateToAction(cardState);
+        _currentCardState = cardState;
     }
 
-    Action ConvertStateToAction(State state)
+    Action ConvertStateToAction(CardState cardState)
     {
-        switch (state)
+        switch (cardState)
         {
-            case State.Idle:
+            case CardState.Idle:
                 return () => { };
-            case State.MoveUp:
+            case CardState.MoveUp:
                 return MoveUp;
-            case State.MoveToMouse:
+            case CardState.MoveToMouse:
                 return MoveToMouse;
-            default: throw new ArgumentException("Can't convert this state to action");
+            default: throw new ArgumentException("Can't convert this cardState to action");
         }
     }
 
-    enum State
+    public enum CardState
     {
         Idle,
         MoveUp,
         MoveToMouse
+    }
+
+    public enum CardType
+    {
+        Buckwheat,
+        MegaBuckweat,
+        Lego,
+        BadWithBuckweat,
+        Portrait
     }
 }
