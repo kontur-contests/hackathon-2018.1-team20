@@ -8,11 +8,13 @@ public class CardController : MonoBehaviour
 {
     public Transform CardSpawn;
     public float ReloadTime;
+    public int MaxCardsCount;
 
     private float _reloadingTime;
     private GameObject[] _cards;
     private GameObject _selectedCard;
     private Dictionary<Card.CardType, GameObject> cardTypeToGameObject;
+    private int _currentCardsCount;
 
     void Start()
     {
@@ -29,7 +31,7 @@ public class CardController : MonoBehaviour
             UnselectCurrentCard();
         }
 
-        if (_reloadingTime < 0)
+        if (_reloadingTime < 0 && _currentCardsCount < MaxCardsCount)
         {
             _reloadingTime = ReloadTime;
             CreateNewCard();
@@ -71,6 +73,7 @@ public class CardController : MonoBehaviour
         var cardType = _selectedCard.GetComponent<Card>().Type;
         var objectPrefab = cardTypeToGameObject[cardType];
         DeleteCard(_selectedCard);
+        _currentCardsCount--;
         return objectPrefab;
     }
 
@@ -85,6 +88,7 @@ public class CardController : MonoBehaviour
         var nextCard = GenerateNextCard();
         var newCard = Instantiate(nextCard, CardSpawn.position, Quaternion.identity);
         newCard.GetComponent<Card>().MoveUpWhileNotCollide();
+        _currentCardsCount++;
     }
 
     void InitCardTypeToDictionary()
@@ -92,6 +96,8 @@ public class CardController : MonoBehaviour
         cardTypeToGameObject = new Dictionary<Card.CardType, GameObject>();
         cardTypeToGameObject[Card.CardType.BuckwheatGun] =
             Resources.Load<GameObject>(@"HQDefence/BuckwheatGun");
+        cardTypeToGameObject[Card.CardType.MegaBuckweatGun] =
+            Resources.Load<GameObject>(@"HQDefence/MegaBuckwheatGun");
         cardTypeToGameObject[Card.CardType.Portrait] =
             Resources.Load<GameObject>(@"HQDefence/Portrait");
     }

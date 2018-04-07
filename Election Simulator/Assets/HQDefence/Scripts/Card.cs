@@ -65,7 +65,7 @@ public class Card : MonoBehaviour
     bool IsCollide()
     {
         var xScale = transform.localScale.x;
-        var colliderWidth = GetComponent<BoxCollider2D>().size.x * xScale / 2 + 0.05F;
+        var colliderWidth = GetComponent<BoxCollider2D>().size.x * xScale / 2 + 0.05F + GetComponent<BoxCollider2D>().offset.x;
         var startPosition = new Vector3(transform.position.x + colliderWidth, transform.position.y);
         var hit = Physics2D.RaycastAll(startPosition, Vector2.right, 0.01F);
         return hit.Length != 0;
