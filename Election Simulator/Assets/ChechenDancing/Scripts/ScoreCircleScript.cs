@@ -1,21 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class ScoreCircleScript : MonoBehaviour {
+public class ScoreCircleScript : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	void OnTriggerEnter2D(Collision2D col)
+	HashSet<GameObject> currentCollidedObjects;
+	void Start ()
 	{
-		Destroy(col.otherCollider.gameObject);
+		currentCollidedObjects = new HashSet<GameObject> ();
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+
+	}
+
+	void FixedUpdate ()
+	{
+		
+	}
+
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		currentCollidedObjects.Add (other.gameObject);
+	}
+	void OnTriggerExit2D (Collider2D other)
+	{
+		currentCollidedObjects.Remove (other.gameObject);
+		Destroy (other.gameObject);
 	}
 }

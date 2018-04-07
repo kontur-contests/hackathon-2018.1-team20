@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212436896869975432}
   - component: {fileID: 50679989149255286}
   - component: {fileID: 61168691839585752}
+  - component: {fileID: 114338759761281408}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -36,8 +37,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1611422764585662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.44, y: 3.3, z: -30}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 13.5, y: 7.25, z: -10}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,15 +79,26 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45, y: 0.46}
-    newSize: {x: 0.47, y: 0.46}
+    oldSize: {x: 0.72, y: 0.72}
+    newSize: {x: 0.72, y: 0.72}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45, y: 0.46}
+  m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &114338759761281408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1611422764585662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289a2aa790794274ab78aabbfc1cd3e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212436896869975432
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -121,12 +133,12 @@ SpriteRenderer:
   m_SortingLayerID: 30649909
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300004, guid: 8f05e161677b70647ba7b4ef5695c632, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 263ed1e7750bf9045bf9c8b8c08d901f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.47, y: 0.46}
+  m_Size: {x: 0.72, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
