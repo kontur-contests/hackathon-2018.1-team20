@@ -95,11 +95,13 @@ public class CardController : MonoBehaviour
     {
         cardTypeToGameObject = new Dictionary<Card.CardType, GameObject>();
         cardTypeToGameObject[Card.CardType.BuckwheatGun] =
-            Resources.Load<GameObject>(@"HQDefence/BuckwheatGun");
+            Resources.Load<GameObject>("HQDefence/BuckwheatGun");
         cardTypeToGameObject[Card.CardType.MegaBuckweatGun] =
-            Resources.Load<GameObject>(@"HQDefence/MegaBuckwheatGun");
+            Resources.Load<GameObject>("HQDefence/MegaBuckwheatGun");
+        cardTypeToGameObject[Card.CardType.Cactus] =
+            Resources.Load<GameObject>("HQDefence/Cactus");
         cardTypeToGameObject[Card.CardType.Portrait] =
-            Resources.Load<GameObject>(@"HQDefence/Portrait");
+            Resources.Load<GameObject>("HQDefence/Portrait");
     }
 
     GameObject GenerateNextCard()

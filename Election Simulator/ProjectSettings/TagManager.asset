@@ -8,6 +8,7 @@ TagManager:
   - Human
   - Contributor
   - Grandmother
+  - EndLevel
   layers:
   - Default
   - TransparentFX

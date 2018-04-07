@@ -16,7 +16,6 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.tag.Equals("Grandmother"))
         {
-            Debug.Log("Hit");
             var controller = collision.collider.GetComponent<GrandmotherController>();
             controller.ReceiveDamage(Damage);
             Destroy(gameObject);
@@ -27,10 +26,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.tag.Equals("Grandmother"))
         {
-            Debug.Log("Hit");
             var controller = collision.GetComponent<GrandmotherController>();
             controller.ReceiveDamage(Damage);
             Destroy(gameObject);
         }
+
+        if (collision.tag.Equals("EndLevel"))
+            Destroy(gameObject);
     }
 }

@@ -102,7 +102,7 @@ public class Card : MonoBehaviour
     {
         BuckwheatGun,
         MegaBuckweatGun,
-        Lego,
+        Cactus,
         BadWithBuckweat,
         Portrait
     }

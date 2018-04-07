@@ -22,12 +22,13 @@ public class GrandmotherController : MonoBehaviour
 
     void MovingLeft()
     {
-        transform.Translate(0.5f * Vector3.left * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+        transform.Translate(2f * Vector3.left * Time.deltaTime);
+        //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.collider.tag + " Collision");
         if (!collision.collider.tag.Equals("Contributor"))
             return;
         var controller = collision.collider.GetComponent<BasicCollaboratorController>();
@@ -39,6 +40,7 @@ public class GrandmotherController : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
+        Debug.Log(collision.tag + " Trigger");
         if (!collision.tag.Equals("Contributor"))
             return;
         var controller = collision.GetComponent<BasicCollaboratorController>();
@@ -66,10 +68,4 @@ public class GrandmotherController : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-    //void OnTriggerEnter(Collider collision)
-    //{
-    //    var controller = collision.gameObject.GetComponent<BasicCollaboratorController>();
-    //    Debug.Log(controller.Type);
-    //}
 }

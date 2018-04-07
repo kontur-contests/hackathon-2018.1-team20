@@ -40,7 +40,6 @@ public class Field : MonoBehaviour
 
     void RemoveCurrentContributor(BasicCollaboratorController controler)
     {
-        Debug.Log("remove");
         _currentContributor = null;
     }
 
