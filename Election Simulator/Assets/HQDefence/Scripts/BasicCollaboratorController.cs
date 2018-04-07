@@ -3,9 +3,13 @@
 public class BasicCollaboratorController : MonoBehaviour
 {
     public Card.CardType Type;
+    
+    [Range(0, 10)]
+    public float SecondsToDestroy;
 
-    [Range(0, 200)]
-    public float Health;
+    public delegate void DieDelegate();
+
+    public event DieDelegate OnDie;
 
     void Start()
     {
@@ -17,15 +21,10 @@ public class BasicCollaboratorController : MonoBehaviour
 
     }
 
-    public void ReceiveDamage(float value)
-    {
-        Health -= value;
-        if (Health <= 0)
-            Die();
-    }
-
     public void Die()
     {
+        if (OnDie != null)
+            OnDie();
         Destroy(gameObject);
     }
 }

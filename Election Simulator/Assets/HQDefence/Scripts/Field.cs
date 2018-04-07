@@ -6,9 +6,8 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
-    private bool IsEmpty = true;
-
     private CardController _cardController;
+    private GameObject _currentContributor;
 
     void Start()
     {
@@ -22,18 +21,30 @@ public class Field : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!IsEmpty)
+        if (!IsEmpty())
             return;
         var selectedCard = _cardController.GetSelectedCard();
         if (selectedCard == null)
             return;
-        var card = _cardController.DistributeSelectedCard();
-        Instantiate(card, transform.position, Quaternion.identity);
-        IsEmpty = false;
-        Debug.Log(this.gameObject.name);
+        AddContributor(selectedCard);
     }
 
-    void AddHero(GameObject card)
+    void AddContributor(GameObject card)
     {
+        var contributor = _cardController.DistributeSelectedCard();
+        _currentContributor = Instantiate(contributor, transform.position, Quaternion.identity);
+        var controller = _currentContributor.GetComponent<BasicCollaboratorController>();
+        controller.OnDie += () => { RemoveCurrentContributor(controller); };
+    }
+
+    void RemoveCurrentContributor(BasicCollaboratorController controler)
+    {
+        Debug.Log("remove");
+        _currentContributor = null;
+    }
+
+    private bool IsEmpty()
+    {
+        return _currentContributor == null;
     }
 }

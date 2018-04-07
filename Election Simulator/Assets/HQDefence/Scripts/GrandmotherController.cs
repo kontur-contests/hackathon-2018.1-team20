@@ -9,26 +9,20 @@ public class GrandmotherController : MonoBehaviour
     [Range(0, 200)]
     public float Damage;
 
-    public float DelayInSeconds;
+    public float Health;
 
-    private Stack<Action> _fsm;
-    private float _timeInSleep;
+    private bool _isMoving = true;
 
-    void Start()
-    {
-        _fsm = new Stack<Action>();
-        _fsm.Push(MovingLeft);
-    }
 
     void Update()
     {
-        if (_fsm.Count != 0)
-            _fsm.Peek().Invoke();
+        if (_isMoving)
+            MovingLeft();
     }
 
     void MovingLeft()
     {
-        transform.Translate(Vector3.left * Time.deltaTime);
+        transform.Translate(0.5f * Vector3.left * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 
@@ -39,30 +33,32 @@ public class GrandmotherController : MonoBehaviour
         var controller = collision.collider.GetComponent<BasicCollaboratorController>();
         if (controller == null)
             return;
-        _fsm.Push(() => Attack(collision.gameObject, controller));
+        _isMoving = false;
+        StartCoroutine(Attack(controller));
     }
 
-    void OnTriggerEnter(Collider collision)
+    IEnumerator Attack(BasicCollaboratorController controller)
     {
-        var controller = collision.gameObject.GetComponent<BasicCollaboratorController>();
-        Debug.Log(controller.Type);
+        yield return new WaitForSeconds(controller.SecondsToDestroy);
+        _isMoving = true;
+        controller.Die();
     }
 
-    void Attack(GameObject gameObject, BasicCollaboratorController controller)
+    public void ReceiveDamage(float damage)
     {
-        if (gameObject == null)
-            _fsm.Pop();
-        if (controller == null)
-            _fsm.Pop();
-        controller.ReceiveDamage(Damage);
-        Debug.Log("Hit to " + gameObject.tag);
-        _fsm.Push(() => Sleep(1));
+        Health -= damage;
+        if (Health <= 0)
+            Die();
     }
 
-    void Sleep(float millseconds)
+    void Die()
     {
-        _timeInSleep += Time.deltaTime;
-        if (_timeInSleep >= millseconds)
-            _fsm.Pop();
+        Destroy(gameObject);
     }
+
+    //void OnTriggerEnter(Collider collision)
+    //{
+    //    var controller = collision.gameObject.GetComponent<BasicCollaboratorController>();
+    //    Debug.Log(controller.Type);
+    //}
 }

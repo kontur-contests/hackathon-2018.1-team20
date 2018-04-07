@@ -62,6 +62,7 @@ public class CardController : MonoBehaviour
         _selectedCard.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         _selectedCard = null;
     }
+
     public GameObject DistributeSelectedCard()
     {
         if (_selectedCard == null)
