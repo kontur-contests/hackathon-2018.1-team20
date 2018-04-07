@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.ChechenDancing.Scripts
-{
-	enum Direction
+
+	public enum Direction
 	{
 		Up, Down, Left, Right
 	}
-}
+
