@@ -28,18 +28,17 @@ public class ReporterController : Human {
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
 		state = GoToField;	
-		//animator = GetComponent<Animator>();
+		animator = GetComponent<Animator>();
 		fieldWidth = field.transform.localScale.x;
 		fieldHeight = field.transform.localScale.y;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {	
 		if (!isAgitated && processAgitation >= 100) 
 		{
 			isAgitated = true;
 			CreatePrefabs();
-			//animator.SetBool("IsAgitated", isAgitated);
 		}
 		if (isAgitated) countOfAgitated++;
 		if (isAgitated && countOfAgitated >= maxCountOfAgitated){
@@ -48,6 +47,11 @@ public class ReporterController : Human {
 			processAgitation = 0;
 		}
 		state();
+		animator.SetBool("IsWalking", rb2d.velocity.magnitude > 0);
+	}
+
+	void FixedUpdate() {
+		animator.SetBool("IsWalking", rb2d.velocity.magnitude > 0);
 	}
 
 	private void CreatePrefabs() {
@@ -64,6 +68,7 @@ public class ReporterController : Human {
 
 	private void Stay() 
 	{
+		animator.SetBool("IsShoting", false);
 		countOfStaying++;
 		if (countOfStaying >= maxCountOfStaying)
 		{
@@ -76,6 +81,7 @@ public class ReporterController : Human {
 
 	private void Walk() 
 	{
+		animator.SetBool("IsShoting", false);
 		var delta = target - (Vector2)transform.position;
 		rb2d.velocity = delta.normalized * speed;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
@@ -86,18 +92,21 @@ public class ReporterController : Human {
 		}
 	}
 
+
 	private float lastProgress = 0;
 	private void GetAgitation() {
 		if (lastProgress == processAgitation) {
 			state = Stay;
-			countOfStaying = 10;
+			countOfStaying = 10;	
 		}
+		animator.SetBool("IsShoting", true);
 		var delta = target - (Vector2)transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
 		lastProgress = processAgitation;
 	}
 
 	private void GoToField() {
+		animator.SetBool("IsShoting", false);
 		var delta = (Vector2)field.transform.position - (Vector2)transform.position;
 		rb2d.velocity = delta.normalized * speed;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
