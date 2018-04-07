@@ -37,6 +37,14 @@ public class ChiefController : MonoBehaviour {
 		return Vector2.Distance (chiefRigid.position, currentTarget) < distanceThreshold;
 	}
 
+	public void SkipTarget() {
+		Debug.Log ("Skip target");
+		currentTarget = default(Vector2);
+		currentSpeed = default(Vector2);
+		currentSpeed = GetSpeedVector (currentTarget);
+		NextTarget ();
+	}
+
 	public void NextTarget () {
 		if (nextTargets.Count > 0) {
 			currentTarget = nextTargets.Dequeue ();
@@ -61,7 +69,7 @@ public class ChiefController : MonoBehaviour {
 			dist.x * maxSpeed,
 			dist.y * maxSpeed
 		);
-	}
+	}	
 
 	Vector2 Vector3to2(Vector3 vec) {
 		return new Vector2(vec.x, vec.y);

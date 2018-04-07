@@ -17,7 +17,7 @@ public class OfficeController : MonoBehaviour {
 	void OnTriggerExit2D (Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			Debug.Log ("Tried to exit");
-			other.gameObject.GetComponent<ChiefController>().NextTarget ();
+			other.gameObject.GetComponent<ChiefController>().SkipTarget();
 		}
 	}
 }
