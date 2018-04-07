@@ -25,6 +25,7 @@ public class Card : MonoBehaviour
         {
             _currentAction.Invoke();
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 
     void OnMouseDown()
@@ -64,7 +65,7 @@ public class Card : MonoBehaviour
     bool IsCollide()
     {
         var yScale = transform.localScale.y;
-        var colliderHeigth = GetComponent<BoxCollider2D>().size.y * yScale / 2 + 0.01F;
+        var colliderHeigth = GetComponent<BoxCollider2D>().size.y * yScale / 2 + 0.05F;
         var startPosition = new Vector3(transform.position.x, transform.position.y + colliderHeigth);
         var hit = Physics2D.RaycastAll(startPosition, Vector2.up, 0.01F);
         return hit.Length != 0;
@@ -81,7 +82,7 @@ public class Card : MonoBehaviour
         switch (cardState)
         {
             case CardState.Idle:
-                return () => { };
+                return () => { if (!IsCollide()) UpdateState(CardState.MoveUp); };
             case CardState.MoveUp:
                 return MoveUp;
             case CardState.MoveToMouse:
@@ -99,8 +100,8 @@ public class Card : MonoBehaviour
 
     public enum CardType
     {
-        Buckwheat,
-        MegaBuckweat,
+        BuckwheatGun,
+        MegaBuckweatGun,
         Lego,
         BadWithBuckweat,
         Portrait

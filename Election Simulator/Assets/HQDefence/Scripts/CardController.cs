@@ -25,6 +25,11 @@ public class CardController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnselectCurrentCard();
+        }
+
         if (_reloadingTime < 0)
         {
             _reloadingTime = ReloadTime;
@@ -42,11 +47,21 @@ public class CardController : MonoBehaviour
     public void SelectCard(GameObject card)
     {
         if (card.GetComponent<Card>() == null)
+        {
             Debug.LogError("You try add not card");
-        else
-            _selectedCard = card;
+            return;
+        }
+        _selectedCard = card;
+        _selectedCard.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
     }
 
+    public void UnselectCurrentCard()
+    {
+        if (_selectedCard == null)
+            return;
+        _selectedCard.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        _selectedCard = null;
+    }
     public GameObject DistributeSelectedCard()
     {
         if (_selectedCard == null)
@@ -74,8 +89,10 @@ public class CardController : MonoBehaviour
     void InitCardTypeToDictionary()
     {
         cardTypeToGameObject = new Dictionary<Card.CardType, GameObject>();
-        cardTypeToGameObject[Card.CardType.Buckwheat] =
-            AssetDatabase.LoadAssetAtPath<GameObject>(@"Assets/HQDefence/Prefabs/Buckwheat.prefab");
+        cardTypeToGameObject[Card.CardType.BuckwheatGun] =
+            AssetDatabase.LoadAssetAtPath<GameObject>(@"Assets/HQDefence/Prefabs/BuckwheatGun.prefab");
+        cardTypeToGameObject[Card.CardType.Portrait] =
+            AssetDatabase.LoadAssetAtPath<GameObject>(@"Assets/HQDefence/Prefabs/Portrait.prefab");
     }
 
     GameObject GenerateNextCard()

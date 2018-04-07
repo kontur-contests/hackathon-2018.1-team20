@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AgitationRoom
   - Human
+  - Contributor
   layers:
   - Default
   - TransparentFX
