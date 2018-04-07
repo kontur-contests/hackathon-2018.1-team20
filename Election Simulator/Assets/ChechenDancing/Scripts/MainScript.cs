@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class MainScript : MonoBehaviour
 {
-	private const float lengthInArrowTicks = 60;
+	private const float lengthInArrowTicks = 90;
 	public GameObject arrowPrefab;
 	public GameObject scoreTextObject;
 	private System.Random random;
@@ -15,6 +16,7 @@ public class MainScript : MonoBehaviour
 	{
 		random = new System.Random ();
 		StartCoroutine (arrowCreator ());
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ApologizeScene");
 	}
 
 	void Update ()

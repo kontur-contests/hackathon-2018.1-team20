@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2046911401
+    locked: 0
+  - name: Arrows
+    uniqueID: 30649909
+    locked: 0
+  - name: ArrowCircle
+    uniqueID: 1964944481
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
