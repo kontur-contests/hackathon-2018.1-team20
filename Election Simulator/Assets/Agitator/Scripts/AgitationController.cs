@@ -19,6 +19,6 @@ public class AgitationController : MonoBehaviour {
 		if (!playerController.isAgitating) return;
 		if (!other.gameObject.tag.Equals("Human")) return;
 		var hc = other.gameObject.GetComponent<HumanController>();
-		if (!hc.isAgitated) hc.SetAgitation(1);
+		if (!hc.isAgitated) hc.SetAgitation(transform.parent.gameObject.transform.position, 1);
 	}
 }

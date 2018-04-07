@@ -16,6 +16,7 @@ public class HumanController : MonoBehaviour
 	private Vector2 target;
 	private System.Random random = new System.Random();
 	private Rigidbody2D rb2d;
+	private Animator animator;
 	private float fieldWidth;
 	private float fieldHeight;
 	private int maxCountOfStaying = 100;
@@ -26,6 +27,7 @@ public class HumanController : MonoBehaviour
 	{
 		rb2d = GetComponent<Rigidbody2D>();
 		state = Walk;	
+		animator = GetComponent<Animator>();
 		fieldWidth = field.transform.localScale.x;
 		fieldHeight = field.transform.localScale.y;
 	}
@@ -36,14 +38,23 @@ public class HumanController : MonoBehaviour
 		if (!isAgitated && processAgitation >= 100) 
 		{
 			isAgitated = true;
+			animator.SetBool("IsAgitated", isAgitated);
 		}
 		state(); 
+
+		animator.SetBool("IsWalking", rb2d.velocity.magnitude < 0.5 ? false : true);
 	}
 
-	public void SetAgitation(float agitationPower) 
+	void FixedUpdate() {
+		animator.SetBool("IsWalking", rb2d.velocity.magnitude > 0);
+	}
+
+	public void SetAgitation(Vector2 agitatorPosition, float agitationPower) 
 	{
 		if (isAgitated) return;
 		processAgitation += agitationPower * difficultAgitation;
+		target = agitatorPosition;
+		state = GetAgitation;
 	}
 
 	private float GetAngleBetween(Vector2 center, Vector2 target) {
@@ -60,7 +71,7 @@ public class HumanController : MonoBehaviour
 		}
 		var delta = target - (Vector2)transform.position;
 		rb2d.velocity = delta.normalized * speed;
-		transform.rotation = Quaternion.Euler(0, 0, GetAngleBetween(transform.position, target) * Mathf.Deg2Rad);
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
 		if (Vector2.Distance(target, transform.position) < 10) 
 		{
 			countOfStaying = 0;
@@ -75,12 +86,28 @@ public class HumanController : MonoBehaviour
 		{
 			var x = random.Next((int)fieldWidth);
 			var y = random.Next((int)fieldHeight);
-			Debug.Log(x+ " " + y);
-			Debug.Log((field.transform.position.x - fieldWidth / 2 + x) + " " + (field.transform.position.y - fieldHeight / 2 + y));
-			Debug.Log(field.transform.position.x - fieldWidth / 2);
 			target = new Vector2(field.transform.position.x - fieldWidth / 2 + x, field.transform.position.y - fieldHeight / 2 + y);
 			state = Walk;
 		}
+	}
+
+	private float lastProgress = 0;
+	private void GetAgitation() {
+		if (lastProgress == processAgitation) {
+			state = Stay;
+			countOfStaying = 10;
+		}
+		var delta = target - (Vector2)transform.position;
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
+		lastProgress = processAgitation;
+	}
+
+
+
+	void OnCollisionEnter2D(Collision2D other) 
+	{
+		countOfStaying = 0;
+		state = Stay;
 	}
 
 }
