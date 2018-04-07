@@ -47,4 +47,9 @@ public class Field : MonoBehaviour
     {
         return _currentContributor == null;
     }
+
+    void OnMouseOver()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(1f, 0.5f, 1f, 1f);
+    }
 }

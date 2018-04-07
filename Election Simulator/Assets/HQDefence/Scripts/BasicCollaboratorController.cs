@@ -11,20 +11,15 @@ public class BasicCollaboratorController : MonoBehaviour
 
     public event DieDelegate OnDie;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void Die()
     {
         if (OnDie != null)
             OnDie();
         Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 }

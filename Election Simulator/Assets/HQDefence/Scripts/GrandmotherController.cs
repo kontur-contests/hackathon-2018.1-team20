@@ -37,6 +37,17 @@ public class GrandmotherController : MonoBehaviour
         StartCoroutine(Attack(controller));
     }
 
+    void OnTriggerEnter(Collider collision)
+    {
+        if (!collision.tag.Equals("Contributor"))
+            return;
+        var controller = collision.GetComponent<BasicCollaboratorController>();
+        if (controller == null)
+            return;
+        _isMoving = false;
+        StartCoroutine(Attack(controller));
+    }
+
     IEnumerator Attack(BasicCollaboratorController controller)
     {
         yield return new WaitForSeconds(controller.SecondsToDestroy);

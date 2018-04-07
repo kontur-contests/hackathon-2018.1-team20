@@ -25,7 +25,6 @@ public class BuckwheatGunController : BasicCollaboratorController
             Shot();
             _reloadTime = ReloadTime;
         }
-
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
     }
 
@@ -36,6 +35,5 @@ public class BuckwheatGunController : BasicCollaboratorController
         var delta = colliderWidth * xScale;
         var startPosition = new Vector3(transform.position.x + delta, transform.position.y, transform.position.y);
         var bullet = Instantiate(Bullet, startPosition, Quaternion.identity);
-        Debug.Break();
     }
 }
