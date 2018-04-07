@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainScript : MonoBehaviour
 {
 	private const float lengthInArrowTicks = 60;
 	public GameObject arrowPrefab;
+	public GameObject scoreTextObject;
 	private System.Random random;
+	private int currentScore = 0;
 	void Start ()
 	{
 		random = new System.Random ();
@@ -54,5 +57,15 @@ public class MainScript : MonoBehaviour
 		var result = (Direction) values.GetValue (random.Next (values.Length));
 		return result;
 	}
+	public void IncrementScore(){
+		currentScore += 10;
+		scoreTextObject.GetComponent<Text>().text = currentScore.ToString();
+		scoreTextObject.GetComponent<ScoreTextScript>().Blink(Color.green, 0.25f);
+	}
 
+	public void DecrementScore(){
+		currentScore -= 10;
+		scoreTextObject.GetComponent<Text>().text = currentScore.ToString();
+		scoreTextObject.GetComponent<ScoreTextScript>().Blink(Color.red, 0.25f);
+	}
 }
