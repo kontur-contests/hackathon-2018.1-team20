@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class HumanController : MonoBehaviour 
+public class HumanController : Human 
 {
 
 	public float speed = 10;
-	public bool isAgitated = false;
 	private float processAgitation = 0;
 	public float difficultAgitation;
 	public GameObject field;
@@ -26,7 +25,7 @@ public class HumanController : MonoBehaviour
 	void Start () 
 	{
 		rb2d = GetComponent<Rigidbody2D>();
-		state = Walk;	
+		state = GoToField;	
 		animator = GetComponent<Animator>();
 		fieldWidth = field.transform.localScale.x;
 		fieldHeight = field.transform.localScale.y;
@@ -49,7 +48,7 @@ public class HumanController : MonoBehaviour
 		animator.SetBool("IsWalking", rb2d.velocity.magnitude > 0);
 	}
 
-	public void SetAgitation(Vector2 agitatorPosition, float agitationPower) 
+	public override void SetAgitation(Vector2 agitatorPosition, float agitationPower) 
 	{
 		if (isAgitated) return;
 		processAgitation += agitationPower * difficultAgitation;
@@ -62,13 +61,14 @@ public class HumanController : MonoBehaviour
 		return Mathf.Atan2(delta.y, delta.x);
 	}
 
+	private void GoToField() {
+		var delta = (Vector2)field.transform.position - (Vector2)transform.position;
+		rb2d.velocity = delta.normalized * speed;
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
+	}
+
 	private void Walk() 
 	{
-		if (target == null) 
-		{
-			state = Stay;
-			return;
-		}
 		var delta = target - (Vector2)transform.position;
 		rb2d.velocity = delta.normalized * speed;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
@@ -102,12 +102,17 @@ public class HumanController : MonoBehaviour
 		lastProgress = processAgitation;
 	}
 
-
-
 	void OnCollisionEnter2D(Collision2D other) 
 	{
 		countOfStaying = 0;
 		state = Stay;
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag.Equals("Field")) {
+			state = Stay;
+			GetComponent<CircleCollider2D>().isTrigger = false;	
+		}
 	}
 
 }
