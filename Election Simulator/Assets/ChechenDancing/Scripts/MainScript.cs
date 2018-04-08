@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -16,7 +17,6 @@ public class MainScript : MonoBehaviour
 	{
 		random = new System.Random ();
 		StartCoroutine (arrowCreator ());
-        UnityEngine.SceneManagement.SceneManager.LoadScene("ApologizeScene");
 	}
 
 	void Update ()
@@ -26,7 +26,7 @@ public class MainScript : MonoBehaviour
 
 	IEnumerator arrowCreator ()
 	{
-		var ticksElapsed = 0;
+        var ticksElapsed = 0;
 		float velocityModifier = 1;
 		while (ticksElapsed < lengthInArrowTicks)
 		{
@@ -46,9 +46,11 @@ public class MainScript : MonoBehaviour
 
 			yield return new WaitForSeconds ((float) delay / 2);
 		}
-	}
+        SceneManager.LoadScene("chechnya_final");
 
-	int GetRandomDelay ()
+    }
+
+    int GetRandomDelay ()
 	{
 		return random.Next (1, 4);
 	}
