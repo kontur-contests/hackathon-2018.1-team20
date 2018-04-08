@@ -9,6 +9,7 @@ TagManager:
   - Contributor
   - Grandmother
   - EndLevel
+  - Field
   layers:
   - Default
   - TransparentFX
