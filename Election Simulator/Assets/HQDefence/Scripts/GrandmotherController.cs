@@ -61,7 +61,6 @@ public class GrandmotherController : MonoBehaviour
         }
         else if (collision.tag.Equals("Finish"))
         {
-            Debug.Break();
             var fader = FindObjectOfType<ScreenFader>();
             if (fader != null)
                 fader.State = ScreenFader.FadeState.In;

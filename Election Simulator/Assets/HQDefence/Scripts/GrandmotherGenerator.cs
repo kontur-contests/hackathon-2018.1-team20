@@ -45,7 +45,7 @@ public class GrandmotherGenerator : MonoBehaviour
     {
         var randomLineIndex = GetRandomLane();
         var tmp = _spawnCoords[randomLineIndex].position;
-        var spawnCoordinates = new Vector3(tmp.x, tmp.y, tmp.z - randomLineIndex);
+        var spawnCoordinates = new Vector3(tmp.x, tmp.y, tmp.z - randomLineIndex - 0.01F);
         Instantiate(GrandMotherPrefab, spawnCoordinates, Quaternion.identity);
         _currentCountGrandMothers++;
     }
