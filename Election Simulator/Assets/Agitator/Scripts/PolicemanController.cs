@@ -59,13 +59,21 @@ public class PolicemanController : MonoBehaviour {
 				}
 				if (col.gameObject.tag.Equals("Player")) {
 					var pc = col.gameObject.GetComponent<PlayerController>();
-					if (pc.isAgitating) {
-						//HERE END OF GAME
+					if (pc.isAgitating)
+					{
+                        FindObjectOfType<ScreenFader>().State = ScreenFader.FadeState.In;
+					    StartCoroutine(GoNextScene(2));
 					}
 				}
 			}
 		}
 	}
+
+    IEnumerator GoNextScene(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FindObjectOfType<NextLevelLoader>().LoadNextLevel();
+    }
 
 	private void Walk() 
 	{
