@@ -113,8 +113,10 @@ MonoBehaviour:
   field: {fileID: 0}
   humanPrefab: {fileID: 1003057404230966, guid: c06190743c669094dbfe6a88e182fd8c,
     type: 2}
-  reporterPrefab: {fileID: 1500546158590168, guid: 5557cef34c8216d469f6b369717225b1,
+  reporterPrefab: {fileID: 1482966468272720}
+  policemanPrefab: {fileID: 1629577429821374, guid: 746b7cb3a2dabe14ba50c1aa13e56d30,
     type: 2}
+  policemanSpawn: {fileID: 0}
 --- !u!212 &212932301256022960
 SpriteRenderer:
   m_ObjectHideFlags: 1

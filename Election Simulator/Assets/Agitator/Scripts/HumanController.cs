@@ -20,6 +20,7 @@ public class HumanController : Human
 	private float fieldHeight;
 	private int maxCountOfStaying = 100;
 	private int countOfStaying = 0;
+	private GameObject policeman;
 
 	// Use this for initialization
 	void Start () 
@@ -102,8 +103,15 @@ public class HumanController : Human
 		lastProgress = processAgitation;
 	}
 
+	private void MoveToPoliceman() {
+		var delta = (Vector2)policeman.transform.position - (Vector2)transform.position;
+		rb2d.velocity = delta.normalized * speed;
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
+	}
+
 	void OnCollisionEnter2D(Collision2D other) 
 	{
+		if (policeman != null) return;
 		countOfStaying = 0;
 		state = Stay;
 	}
@@ -113,6 +121,12 @@ public class HumanController : Human
 			state = Stay;
 			GetComponent<CircleCollider2D>().isTrigger = false;	
 		}
+	}
+
+	public void SetArrested(GameObject policeman) {
+		animator.SetBool("IsArrested", true);
+		this.policeman = policeman;
+		state = MoveToPoliceman;
 	}
 
 }

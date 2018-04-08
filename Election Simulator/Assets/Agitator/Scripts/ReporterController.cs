@@ -11,6 +11,8 @@ public class ReporterController : Human {
 	public GameObject field;
 	public GameObject humanPrefab;
 	public GameObject reporterPrefab;
+	public GameObject policemanPrefab;
+	public GameObject policemanSpawn;
 
 	private Action state;
 	private Vector2 target;
@@ -55,15 +57,20 @@ public class ReporterController : Human {
 	}
 
 	private void CreatePrefabs() {
-		for (var i = 0; i < 5; i++)
+		for (var i = 0; i < 3; i++)
 		{
-			var human = Instantiate(humanPrefab, new Vector3(field.transform.position.x - 15, field.transform.position.y - 12 + i * 5, 0), transform.rotation);
+			var human = Instantiate(humanPrefab, new Vector3(field.transform.position.x - 30, field.transform.position.y - 12 - i * 5, 0), transform.rotation);
 			var hc = human.GetComponent<HumanController>();
 			hc.field = field;
 		}
-		var reporter = Instantiate(reporterPrefab, new Vector3(field.transform.position.x, field.transform.position.y + 12, 0), transform.rotation);
+		var reporter = Instantiate(reporterPrefab, new Vector3(field.transform.position.x, field.transform.position.y + 25, 0), transform.rotation);
 		var rc = reporter.GetComponent<ReporterController>();
 		rc.field = field;
+		rc.policemanSpawn = policemanSpawn;
+		var policeman = Instantiate(policemanPrefab, policemanSpawn.gameObject.transform.position, transform.rotation);
+		var pc = policeman.GetComponent<PolicemanController>();
+		pc.field = field;
+		pc.spawn = policemanSpawn;
 	}
 
 	private void Stay() 
