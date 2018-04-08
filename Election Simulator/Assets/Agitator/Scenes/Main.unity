@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3882c08b757ab3643964559765d3c934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLevelName: krasnodar_before_1
+  NextLevelName: moscow_after_1
   KeyActivate: 0
 --- !u!1 &1137867029
 GameObject:

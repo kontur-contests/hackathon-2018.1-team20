@@ -11,7 +11,7 @@ public class main : MonoBehaviour {
 		
 	}
 	IEnumerator wait (){
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
 		SceneManager.LoadScene("ChechenDancing/Scenes/MainDance");
 	}
 	
