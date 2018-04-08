@@ -6,16 +6,20 @@ using UnityEngine;
 public class DoorController : MonoBehaviour {
 	public GameObject visitorPrefab;
 	public GameObject mainController;
+	public GameObject exit;
+	public GameObject table;
 	bool opened = false;
 	private Transform doorTransform;
 	private System.Random rand = new System.Random();
 	int framesUntilSpawn = 60;
 	int framesUntilTry = 60;
+	int framesNotEmpty = 0;
 	Vector2 mainAxis;
 	Vector2 secondaryAxis;
 	public bool horizontal;
 	public bool right;
 	int blockedFor = 0;
+	Vector3 initialCenter;
 
 	private Queue<Visitor> visitorsQueue = new Queue<Visitor>();
 	private Dictionary<Visitor, GameObject> visitorObjects = new Dictionary<Visitor, GameObject>();
@@ -23,6 +27,7 @@ public class DoorController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		doorTransform = GetComponent<Transform> ();
+		initialCenter = doorTransform.position;
 		if (horizontal) {
 			if (right) {
 				mainAxis = new Vector2 (0, -1);
@@ -56,22 +61,31 @@ public class DoorController : MonoBehaviour {
 		}
 
 		framesUntilTry--;
-		if (framesUntilTry < 0 && visitorsQueue.Count > 0) {
-			Visitor extracted = visitorsQueue.Dequeue ();
-			GameObject extractedObject = visitorObjects [extracted];
-//			Rigidbody2D extractedRigid = extractedObject.GetComponent<Rigidbody2D> ();
-//			extractedRigid.AddForce (new Vector2 (0,-0.5f));
-//			extractedRigid.
-			Destroy (extractedObject);
+		framesNotEmpty++;
+		if (framesUntilTry < 0 && visitorsQueue.Count > 0 && framesNotEmpty > 180) {
+			RevealPassed ();
+			framesNotEmpty = 0;
 			if (visitorsQueue.Count > 0 && opened) {
 				visitorObjects [visitorsQueue.Peek ()].GetComponent<Transform> ().position -= new Vector3 (mainAxis.x, mainAxis.y, 0); 
 			}
-			MainController.VisitorAction act = opened ? MainController.VisitorAction.PASS : MainController.VisitorAction.PASS;
-			mainController.GetComponent<MainController> ().triggerAction (extracted.Reveal(), act);
-			framesUntilTry = 240;
+			framesUntilTry = 100;
 		}
 
 		DrawQueue ();
+	}
+
+	void RevealPassed() {
+		Visitor first = visitorsQueue.Dequeue ();
+		GameObject extractedObject = visitorObjects [first];
+		MainController.VisitorAction act = opened ? MainController.VisitorAction.PASS : MainController.VisitorAction.BLOCK;
+		mainController.GetComponent<MainController> ().triggerAction (first.Reveal(), act);
+		if (!opened)
+			Destroy (extractedObject);
+		else if (first.Reveal () == MainController.VisitorType.VOLUNTEER) {
+			extractedObject.GetComponent<VisitorController> ().JoinNavalny (table.GetComponent<Rigidbody2D> ().position);
+		} else {
+			Destroy (extractedObject);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -96,14 +110,21 @@ public class DoorController : MonoBehaviour {
 	void DrawQueue() {
 		int order = 0;
 		foreach (Visitor vis in visitorsQueue) {
-			Vector2 offset = mainAxis * 0.7f - secondaryAxis * order * 0.5f;
-			Vector3 newPosition = new Vector3 (
-				doorTransform.position.x + offset.x,
-				doorTransform.position.y + offset.y,
-				-5
-			);
-			visitorObjects[vis].GetComponent<Transform> ().position = newPosition;
+			if (order == 0 && opened) {
+				visitorObjects [vis].GetComponent<Transform> ().position = initialCenter - Vector2to3 (mainAxis) * 0.2f;
+			} else {
+				Vector2 offset = mainAxis * 0.7f - secondaryAxis * order * 0.5f;
+				visitorObjects [vis].GetComponent<Transform> ().position = initialCenter + Vector2to3 (offset);
+			}
 			order++;
 		}
+	}
+
+	Vector3 Vector2to3 (Vector2 vec) {
+		return new Vector3 (
+			vec.x,
+			vec.y,
+			0
+		);
 	}
 }
