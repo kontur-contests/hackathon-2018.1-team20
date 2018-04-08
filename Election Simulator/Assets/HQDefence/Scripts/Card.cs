@@ -11,7 +11,6 @@ public class Card : MonoBehaviour
     public CardType Type;
 
     private Action _currentAction;
-    private CardState _currentCardState;
     private CardController _cardController;
 
     void Awake()
@@ -74,7 +73,6 @@ public class Card : MonoBehaviour
     void UpdateState(CardState cardState)
     {
         _currentAction = ConvertStateToAction(cardState);
-        _currentCardState = cardState;
     }
 
     Action ConvertStateToAction(CardState cardState)

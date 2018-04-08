@@ -9,20 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1697447719639238}
+  m_RootGameObject: {fileID: 1327481599542176}
   m_IsPrefabParent: 1
---- !u!1 &1697447719639238
+--- !u!1 &1327481599542176
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4551099567682850}
-  - component: {fileID: 114178277450876276}
-  - component: {fileID: 212387686860109010}
-  - component: {fileID: 95476117800880424}
-  - component: {fileID: 65786708914552730}
+  - component: {fileID: 4264623583094196}
+  - component: {fileID: 114558746991901356}
+  - component: {fileID: 212118352773966982}
+  - component: {fileID: 95377425148731814}
+  - component: {fileID: 65931256092726622}
   m_Layer: 0
   m_Name: MegaBuckwheatGun
   m_TagString: Contributor
@@ -30,38 +30,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4551099567682850
+--- !u!4 &4264623583094196
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697447719639238}
+  m_GameObject: {fileID: 1327481599542176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.1200004, y: -10.340001, z: 50}
+  m_LocalPosition: {x: -8.570001, y: -5.850001, z: 48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65786708914552730
+--- !u!65 &65931256092726622
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697447719639238}
+  m_GameObject: {fileID: 1327481599542176}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.74, y: 4.44, z: 0.2}
-  m_Center: {x: -1.19, y: 0, z: 0}
---- !u!95 &95476117800880424
+  m_Size: {x: 1.74, y: 2, z: 0.2}
+  m_Center: {x: -1.19, y: -1.2, z: 0}
+--- !u!95 &95377425148731814
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697447719639238}
+  m_GameObject: {fileID: 1327481599542176}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 77f3c3d705042fa43bd48c67f64ad894, type: 2}
@@ -72,27 +72,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114178277450876276
+--- !u!114 &114558746991901356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697447719639238}
+  m_GameObject: {fileID: 1327481599542176}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ceced91b15e0e4418ad391f2c74e13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
-  SecondsToDestroy: 3.5
+  SecondsToDestroy: 6
   ReloadTime: 2
-  Bullet: {fileID: 54382361254076028, guid: a322e885fd3cfbb4d879d281de3d2cd3, type: 2}
---- !u!212 &212387686860109010
+  Bullet: {fileID: 54573495194285998, guid: a322e885fd3cfbb4d879d281de3d2cd3, type: 2}
+--- !u!212 &212118352773966982
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697447719639238}
+  m_GameObject: {fileID: 1327481599542176}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

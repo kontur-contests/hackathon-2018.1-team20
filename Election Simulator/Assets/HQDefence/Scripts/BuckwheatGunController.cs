@@ -18,6 +18,6 @@ public class BuckwheatGunController : BasicCollaboratorController
         var colliderWidth = GetComponent<BoxCollider>().size.x;
         var delta = colliderWidth * xScale;
         var startPosition = new Vector3(transform.position.x + delta + 1.8F, transform.position.y, transform.position.z - 0.5f);
-        var bullet = Instantiate(Bullet, startPosition, Quaternion.identity);
+        Instantiate(Bullet, startPosition, Quaternion.identity);
     }
 }

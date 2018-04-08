@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -32,7 +33,11 @@ public class Field : MonoBehaviour
     void AddContributor(GameObject card)
     {
         var contributor = _cardController.DistributeSelectedCard();
-        _currentContributor = Instantiate(contributor, transform.position, Quaternion.identity);
+        var delta = card.GetComponent<SpriteRenderer>().size.y * card.transform.localScale.y / 2;
+        var z = 7.66;
+        z -= Int32.Parse(name[0].ToString());
+        var spawnPosition = new Vector3(transform.position.x, transform.position.y + delta, (float)z);
+        _currentContributor = Instantiate(contributor, spawnPosition, Quaternion.identity);
         contributor.transform.position = new Vector3(transform.position.x, transform.position.y, name[0]);
         var controller = _currentContributor.GetComponent<BasicCollaboratorController>();
         controller.OnDie += () => { RemoveCurrentContributor(controller); };

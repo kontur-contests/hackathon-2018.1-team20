@@ -71,6 +71,7 @@ public class CardController : MonoBehaviour
             return null;
 
         var cardType = _selectedCard.GetComponent<Card>().Type;
+        Debug.Log("Type not null");
         var objectPrefab = cardTypeToGameObject[cardType];
         DeleteCard(_selectedCard);
         _currentCardsCount--;
