@@ -46,10 +46,15 @@ public class DoorController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
+			Vector3 doorCenter = doorTransform.position; // Not a corner
+			Vector3 offset = doorTransform.lossyScale;
+			offset.Scale(new Vector3(0.5f, 0.5f, 0.5f));
+//			Vector3 doorCorner = new Vector3(0,0,0);
+
 			if (opened) {
-				doorTransform.Rotate (new Vector3 (0, 0, 90));
+				doorTransform.RotateAround (doorCenter - offset, Vector3.back, 90);
 			} else {
-				doorTransform.Rotate (new Vector3 (0, 0, -90));
+				doorTransform.RotateAround (doorCenter + offset, Vector3.forward, 90);
 			}
 			opened = !opened;
 		}
@@ -61,7 +66,7 @@ public class DoorController : MonoBehaviour {
 			Vector3 visPosition = new Vector3 (
 				doorTransform.position.x - order * 0.5f,
 				doorTransform.position.y - order * 0.5f,
-				-3
+				-5
 			);
 			visitorObjects[vis].GetComponent<Transform> ().position = visPosition;
 			order++;

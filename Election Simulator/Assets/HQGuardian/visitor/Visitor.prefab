@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4066246605303422}
   - component: {fileID: 212487117859450130}
-  - component: {fileID: 114013990907224002}
   - component: {fileID: 95870578910875936}
+  - component: {fileID: 114203637826257860}
   m_Layer: 0
   m_Name: Visitor
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055864774930568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62, y: 1, z: -2.9011045}
+  m_LocalPosition: {x: -4.62, y: 1, z: -5}
   m_LocalScale: {x: 2, y: 2, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ Animator:
   m_GameObject: {fileID: 1055864774930568}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4c78b2db4a24f44edbd6c1c1af57fc61, type: 2}
+  m_Controller: {fileID: 9100000, guid: 83f5dcb09ce9c4114860001d3474dc0a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -60,7 +60,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114013990907224002
+--- !u!114 &114203637826257860
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1055864774930568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e822eb322d4df46539ebc508f22edabd, type: 3}
+  m_Script: {fileID: 11500000, guid: 720a58714fdc641a199fb1410cdcb778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212487117859450130
@@ -105,8 +105,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d33ee8028b8154c97ae6f40cbd2a7b41, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: ba8a1e9af876440aeaf0cd77b7384c90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
