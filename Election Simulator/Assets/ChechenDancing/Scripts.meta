@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: cef1caccc5539ac49a5bce0dfd57deeb
+folderAsset: yes
+timeCreated: 1523151873
+=======
 guid: 858ffb2bfa59ff24e99de52a5b4403f5
 folderAsset: yes
 timeCreated: 1523092926
+>>>>>>> ChechenDancing
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
