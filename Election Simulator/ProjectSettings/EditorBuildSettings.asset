@@ -17,3 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HQDefence/Scenes/krasnodar_after.unity
     guid: 2e640bb84692fc14fa8e2b06ff820a6c
+  - enabled: 1
+    path: Assets/HQGuardian/LoseScene.unity
+    guid: d9800727959f74c84be4af66689650d1
+  m_configObjects: {}

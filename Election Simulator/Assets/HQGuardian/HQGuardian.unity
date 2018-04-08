@@ -113,6 +113,48 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &80802492
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066246605303422, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4a5c09074dbb34fd7ae89fbe682244a4, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &177086708
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +382,7 @@ MonoBehaviour:
   mainController: {fileID: 1784287164}
   exit: {fileID: 2131627429}
   table: {fileID: 1813564867}
+  character: {fileID: 395485237}
   horizontal: 1
   right: 1
 --- !u!61 &215795937
@@ -688,6 +731,7 @@ MonoBehaviour:
   mainController: {fileID: 1784287164}
   exit: {fileID: 2131627429}
   table: {fileID: 1813564867}
+  character: {fileID: 395485237}
   horizontal: 1
   right: 1
 --- !u!61 &515539674
@@ -1592,6 +1636,7 @@ MonoBehaviour:
   mainController: {fileID: 1784287164}
   exit: {fileID: 2131627429}
   table: {fileID: 1813564867}
+  character: {fileID: 395485237}
   horizontal: 0
   right: 0
 --- !u!61 &1658165338
@@ -2434,6 +2479,7 @@ MonoBehaviour:
   mainController: {fileID: 1784287164}
   exit: {fileID: 2131627429}
   table: {fileID: 1813564867}
+  character: {fileID: 395485237}
   horizontal: 0
   right: 1
 --- !u!61 &1949447819

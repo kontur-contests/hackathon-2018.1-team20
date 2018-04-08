@@ -8,6 +8,7 @@ public class DoorController : MonoBehaviour {
 	public GameObject mainController;
 	public GameObject exit;
 	public GameObject table;
+	public GameObject character;
 	bool opened = false;
 	private Transform doorTransform;
 	private System.Random rand = new System.Random();
@@ -84,7 +85,8 @@ public class DoorController : MonoBehaviour {
 		else if (first.Reveal () == MainController.VisitorType.VOLUNTEER) {
 			extractedObject.GetComponent<VisitorController> ().JoinNavalny (table.GetComponent<Rigidbody2D> ().position);
 		} else {
-			Destroy (extractedObject);
+			extractedObject.GetComponent<VisitorController> ().JoinNavalny (character.GetComponent<Rigidbody2D> ().position);
+			extractedObject.GetComponent<Animator> ().SetBool ("policeDie", true);
 		}
 	}
 

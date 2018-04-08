@@ -22,6 +22,10 @@ public class VisitorController : MonoBehaviour {
 		currentSpeed = GetSpeedVector (target);
 	}
 
+	public void Die () {
+		Destroy (this.gameObject);
+	}
+
 	Vector2 GetSpeedVector (Vector2 target) {
 		Vector2 dist = (target - GetComponent<Rigidbody2D>().position);
 		dist.Normalize ();
