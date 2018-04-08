@@ -24,6 +24,7 @@ public class PolicemanController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 		fieldWidth = field.transform.localScale.x;
 		fieldHeight = field.transform.localScale.y;
 		state = Stay;
@@ -33,6 +34,11 @@ public class PolicemanController : MonoBehaviour {
 	void Update () {
 		if (victim == null && cutchedVictim == null) TryFindVictim();
 		state();
+		animator.SetBool("IsWalking", rb2d.velocity.magnitude > 0);
+	}
+
+	void FixedUpdate() {
+		animator.SetBool("IsWalking", rb2d.velocity.magnitude > 0);
 	}
 
 	private void TryFindVictim() {

@@ -112,6 +112,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &111385858 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1629577429821374, guid: 746b7cb3a2dabe14ba50c1aa13e56d30,
+    type: 2}
+  m_PrefabInternal: {fileID: 1445233898}
+--- !u!95 &111385859
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 111385858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ca6b09308c87784c91edc73beca529c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &299332955
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 830821614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20.31, y: -6.11, z: 0.84765625}
-  m_LocalScale: {x: 2.3950531, y: 2.035013, z: 1.252316}
+  m_LocalScale: {x: 2.88, y: 2.54, z: 1.252316}
   m_Children:
   - {fileID: 643812659}
   m_Father: {fileID: 0}
@@ -937,7 +959,7 @@ Transform:
   m_GameObject: {fileID: 1170235066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.9, y: -3.97, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children:
   - {fileID: 575588179}
   m_Father: {fileID: 0}
@@ -1022,6 +1044,14 @@ Prefab:
       propertyPath: spawn
       value: 
       objectReference: {fileID: 830821614}
+    - target: {fileID: 4407215349987812, guid: 746b7cb3a2dabe14ba50c1aa13e56d30, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407215349987812, guid: 746b7cb3a2dabe14ba50c1aa13e56d30, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 746b7cb3a2dabe14ba50c1aa13e56d30, type: 2}
   m_IsPrefabParent: 0
@@ -1090,6 +1120,14 @@ Prefab:
       propertyPath: policemanSpawn
       value: 
       objectReference: {fileID: 830821614}
+    - target: {fileID: 4588097862866168, guid: 1467f3240f3473843bb4e41c34e0ccdb, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588097862866168, guid: 1467f3240f3473843bb4e41c34e0ccdb, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1467f3240f3473843bb4e41c34e0ccdb, type: 2}
   m_IsPrefabParent: 0
@@ -1344,6 +1382,14 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398599031917886, guid: c06190743c669094dbfe6a88e182fd8c, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398599031917886, guid: c06190743c669094dbfe6a88e182fd8c, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c06190743c669094dbfe6a88e182fd8c, type: 2}
