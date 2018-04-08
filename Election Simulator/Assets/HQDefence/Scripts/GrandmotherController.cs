@@ -65,7 +65,14 @@ public class GrandmotherController : MonoBehaviour
             var fader = FindObjectOfType<ScreenFader>();
             if (fader != null)
                 fader.State = ScreenFader.FadeState.In;
+            StartCoroutine(LoadNextSceneWithDelay(3));
         }
+    }
+
+    IEnumerator LoadNextSceneWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FindObjectOfType<NextLevelLoader>().LoadNextLevel();
     }
 
     IEnumerator Attack(BasicCollaboratorController controller)

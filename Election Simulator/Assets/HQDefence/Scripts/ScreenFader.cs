@@ -18,7 +18,6 @@ public class ScreenFader : MonoBehaviour
         nullTexture.Apply();
         _colorTexture = nullTexture;
         FadeBalance = (1 + FromInDelay);
-        Screen.SetResolution(640, 480, true);
     }
 
     void Update()
